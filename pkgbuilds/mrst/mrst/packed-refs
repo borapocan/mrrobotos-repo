@@ -1,7 +1,0 @@
-# pack-refs with: peeled fully-peeled sorted 
-98b954dc906b864de4035a93dc27be2aeb4d63a7 refs/heads/feature/blinking_cursor
-25ce16b07e16e4226e7b5754dfda5d6cd52fbf86 refs/heads/feature/colorschemes
-47d03c733161a64f0046b380dd386401f73efa05 refs/heads/feature/font2
-7268c8cd3593e9feeceb3249ab4d475162671946 refs/heads/feature/netwmicon
-29c30e4fc9e3979fdc5c64f18fe79d48ae24edb6 refs/heads/feature/scrollback
-98b954dc906b864de4035a93dc27be2aeb4d63a7 refs/heads/master
