@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+#BATTERY=$(cat /sys/class/power_supply/BAT*/capacity)
+#if [[ $BATTERY -lt 94 ]]; then
+#	notify-send -i ~/.config/dunst/images/battery-low.png " Low Battery" "Please charge the battery!";
+#	sleep 1
+#fi
+
+BATTERY=$(cat /sys/class/power_supply/BAT*/capacity | head -n1)
+
+if [ "$BATTERY" -le 199 ]; then
+    dunstify -u critical \
+      -i "$HOME/.config/dunst/images/battery-low.png" \
+      "Low Battery" "Please charge the battery!"
+fi

@@ -1,0 +1,33 @@
+# Maintainer: Bora Poçan <borapocan@github.com>
+pkgname=mrst
+pkgver=0.9
+pkgrel=1
+pkgdesc="MrST - MrRobotOS Simple Terminal with pcustom atches"
+arch=('x86_64')
+license=('MIT')
+depends=('libx11' 'libxft' 'libxrender' 'freetype2' 'gd')
+makedepends=('gcc' 'make')
+conflicts=('st')
+provides=('st')
+url="https://github.com/borapocan/mrst"
+source=("git+https://github.com/borapocan/mrst.git")
+sha256sums=('SKIP')
+
+build() {
+    cd "$srcdir/mrst"
+    make
+}
+
+package() {
+    cd "$srcdir/mrst"
+    install -Dm755 st "$pkgdir/usr/bin/st"
+    sed "s/VERSION/0.9/g" < st.1 > "$pkgdir/usr/share/man/man1/st.1" 2>/dev/null || true
+    mkdir -p "$pkgdir/usr/share/man/man1"
+    sed "s/VERSION/0.9/g" < st.1 > "$pkgdir/usr/share/man/man1/st.1"
+    # install terminfo
+    mkdir -p "$pkgdir/usr/share/terminfo"
+    tic -sx -o "$pkgdir/usr/share/terminfo" st.info 2>/dev/null || true
+	# remove conflicting terminfo files
+    rm -f "$pkgdir/usr/share/terminfo/s/st"
+    rm -f "$pkgdir/usr/share/terminfo/s/st-256color"
+}

@@ -1,0 +1,23 @@
+# Maintainer: Bora Poçan <borapocan@github.com>
+pkgname=mrsettings
+pkgver=1.0
+pkgrel=1
+pkgdesc="mrsettings - MrRobotOS GTK4 Based System Settings Manager"
+arch=('x86_64')
+license=('MIT')
+depends=('gtk4')
+makedepends=('gcc' 'make' 'pkg-config')
+url="https://github.com/borapocan/mrsettings"
+source=("git+https://github.com/borapocan/mrsettings.git")
+sha256sums=('SKIP')
+
+build() {
+    cd "$srcdir/mrsettings"
+    make
+}
+
+package() {
+    cd "$srcdir/mrsettings"
+    install -Dm755 mrsettings "$pkgdir/usr/bin/mrsettings"
+    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

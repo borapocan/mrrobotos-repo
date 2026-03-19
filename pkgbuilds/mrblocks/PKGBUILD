@@ -1,0 +1,27 @@
+# Maintainer: Bora Poçan <borapocan@github.com>
+pkgname=mrblocks
+pkgver=1.0
+pkgrel=1
+pkgdesc="MrBlocks - MrRobotOS dwmblocks status bar with custom scripts"
+arch=('x86_64')
+license=('MIT')
+depends=('libxcb' 'xcb-util')
+makedepends=('gcc' 'make' 'pkg-config')
+conflicts=('dwmblocks')
+provides=('dwmblocks')
+url="https://github.com/borapocan/mrblocks"
+source=("git+https://github.com/borapocan/mrblocks.git")
+sha256sums=('SKIP')
+
+build() {
+    cd "$srcdir/mrblocks"
+    make
+}
+
+package() {
+    cd "$srcdir/mrblocks"
+    make PREFIX="$pkgdir/usr/local" install
+    # install scripts
+    install -d "$pkgdir/usr/local/bin/mrblocks-scripts"
+    install -Dm755 scripts/* "$pkgdir/usr/local/bin/mrblocks-scripts/"
+}
